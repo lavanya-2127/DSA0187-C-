@@ -1,0 +1,14 @@
+#include <iostream>
+int main() {
+    int number, originalNumber, remainder, sum = 0;
+    std::cout << "Enter an integer: ";
+    std::cin >> number;
+    originalNumber = number;
+    while (number != 0) {
+        remainder = number % 10;  
+        sum += remainder;         
+        number /= 10;             
+    }
+    std::cout << "The sum of digits of " << originalNumber << " is: " << sum << std::endl;
+    return 0;
+}
