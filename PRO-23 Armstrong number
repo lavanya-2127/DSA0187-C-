@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cmath>
+bool isArmstrongNumber(int number) {
+    int originalNumber = number;
+    int numDigits = 0;
+    int sum = 0;
+    while (originalNumber != 0) {
+        originalNumber /= 10;
+        numDigits++;
+    }
+    originalNumber = number; 
+    while (originalNumber != 0) {
+        int digit = originalNumber % 10;
+        sum += pow(digit, numDigits);
+        originalNumber /= 10;
+    }
+    return (sum == number);
+}
+int main() {
+    int lower, upper;
+    std::cout << "Enter the lower limit of the range: ";
+    std::cin >> lower;
+    std::cout << "Enter the upper limit of the range: ";
+    std::cin >> upper;
+    std::cout << "Armstrong numbers in the range [" << lower << ", " << upper << "]: " << std::endl;
+    for (int i = lower; i <= upper; ++i) {
+        if (isArmstrongNumber(i)) {
+            std::cout << i << std::endl;
+        }
+    }
+    return 0;
+}
