@@ -1,0 +1,11 @@
+#include <iostream>
+
+int main() {
+    int firstNumber = 5;
+    int secondNumber = 7;
+    int sum = firstNumber + secondNumber;
+    std::cout << "First Number: " << firstNumber << std::endl;
+    std::cout << "Second Number: " << secondNumber << std::endl;
+    std::cout << "Sum: " << sum << std::endl;
+    return 0;
+}
