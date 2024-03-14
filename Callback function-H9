@@ -1,0 +1,17 @@
+#include <iostream>
+typedef void (*CallbackFunction)(int);
+void callbackFunction(int value) {
+    std::cout << "Inside callback function. Received value: " << value << std::endl;
+}
+void performCallback(CallbackFunction callback, int value) {
+ 
+    callback(value);
+}
+
+int main() {
+    std::cout << "Calling performCallback with callbackFunction..." << std::endl;
+
+    performCallback(callbackFunction, 42);
+
+    return 0;
+}
