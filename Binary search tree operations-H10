@@ -1,0 +1,139 @@
+#include <iostream>
+
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) : data(value), left(nullptr), right(nullptr) {}
+};
+
+class BinarySearchTree {
+private:
+    TreeNode* root;
+
+    TreeNode* insertRecursive(TreeNode* node, int value) {
+        if (node == nullptr) {
+            return new TreeNode(value);
+        }
+
+        if (value < node->data) {
+            node->left = insertRecursive(node->left, value);
+        } else if (value > node->data) {
+            node->right = insertRecursive(node->right, value);
+        }
+
+        return node;
+    }
+
+    TreeNode* findMinNode(TreeNode* node) {
+        while (node->left != nullptr) {
+            node = node->left;
+        }
+        return node;
+    }
+
+    // Private recursive function to delete a value from the tree
+    TreeNode* deleteRecursive(TreeNode* node, int value) {
+        if (node == nullptr) {
+            return nullptr;
+        }
+
+        if (value < node->data) {
+            node->left = deleteRecursive(node->left, value);
+        } else if (value > node->data) {
+            node->right = deleteRecursive(node->right, value);
+        } else {
+            // Case 1: No child or only one child
+            if (node->left == nullptr) {
+                TreeNode* temp = node->right;
+                delete node;
+                return temp;
+            } else if (node->right == nullptr) {
+                TreeNode* temp = node->left;
+                delete node;
+                return temp;
+            }
+
+            // Case 2: Two children
+            TreeNode* minRightNode = findMinNode(node->right);
+            node->data = minRightNode->data;
+            node->right = deleteRecursive(node->right, minRightNode->data);
+        }
+
+        return node;
+    }
+
+    void inOrderRecursive(TreeNode* node) {
+        if (node != nullptr) {
+            inOrderRecursive(node->left);
+            std::cout << node->data << " ";
+            inOrderRecursive(node->right);
+        }
+    }
+
+    void preOrderRecursive(TreeNode* node) {
+        if (node != nullptr) {
+            std::cout << node->data << " ";
+            preOrderRecursive(node->left);
+            preOrderRecursive(node->right);
+        }
+    }
+
+    void postOrderRecursive(TreeNode* node) {
+        if (node != nullptr) {
+            postOrderRecursive(node->left);
+            postOrderRecursive(node->right);
+            std::cout << node->data << " ";
+        }
+    }
+
+public:
+    BinarySearchTree() : root(nullptr) {}
+
+    void insert(int value) {
+        root = insertRecursive(root, value);
+    }
+
+    void remove(int value) {
+        root = deleteRecursive(root, value);
+    }
+
+    void inOrderTraversal() {
+        std::cout << "In-order traversal: ";
+        inOrderRecursive(root);
+        std::cout << std::endl;
+    }
+    void preOrderTraversal() {
+        std::cout << "Pre-order traversal: ";
+        preOrderRecursive(root);
+        std::cout << std::endl;
+    }
+
+    // Public function to perform post-order traversal
+    void postOrderTraversal() {
+        std::cout << "Post-order traversal: ";
+        postOrderRecursive(root);
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    
+    BinarySearchTree bst;
+    bst.insert(50);
+    bst.insert(30);
+    bst.insert(20);
+    bst.insert(40);
+    bst.insert(70);
+    bst.insert(60);
+    bst.insert(80);
+    bst.inOrderTraversal();
+    bst.preOrderTraversal();
+    bst.postOrderTraversal();
+
+    bst.remove(20);
+    bst.inOrderTraversal();
+
+    return 0;
+}
