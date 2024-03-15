@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Student {
+private:
+    string name;
+    int id;
+    int grades[3];
+
+public:
+    // Constructor
+    Student(string n, int i) : name(n), id(i) {}
+
+    // Member functions to set student details and grades
+    void setName(string n) {
+        name = n;
+    }
+
+    void setId(int i) {
+        id = i;
+    }
+
+    void setGrades(int g[]) {
+        for (int j = 0; j < 3; ++j) {
+            grades[j] = g[j];
+        }
+    }
+
+    // Member functions to get student details and grades
+    string getName() const {
+        return name;
+    }
+
+    int getId() const {
+        return id;
+    }
+
+    const int* getGrades() const {
+        return grades;
+    }
+};
+
+int main() {
+    // Create a Student object
+    Student student("John Doe", 12345);
+
+    // Set grades
+    int grades[] = {85, 90, 95};
+    student.setGrades(grades);
+
+    // Get and display student details and grades
+    cout << "Student Name: " << student.getName() << endl;
+    cout << "Student ID: " << student.getId() << endl;
+    cout << "Grades: ";
+    const int* studentGrades = student.getGrades();
+    for (int i = 0; i < 3; ++i) {
+        cout << studentGrades[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
