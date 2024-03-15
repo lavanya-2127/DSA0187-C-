@@ -1,0 +1,57 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+// Function prototypes
+double calculateVolume(double sideLength); // For cube
+double calculateVolume(double length, double width, double height); // For rectangle
+double calculateVolume(double radius, double height); // For cylinder
+
+// Function definitions for volume calculation
+double calculateVolume(double sideLength) {
+    return pow(sideLength, 3);
+}
+
+double calculateVolume(double length, double width, double height) {
+    return length * width * height;
+}
+
+double calculateVolume(double radius, double height) {
+    return M_PI * pow(radius, 2) * height;
+}
+
+int main() {
+    int choice;
+    double sideLength, length, width, height, radius;
+
+    cout << "Select the shape to calculate volume:" << endl;
+    cout << "1. Cube" << endl;
+    cout << "2. Rectangle" << endl;
+    cout << "3. Cylinder" << endl;
+    cout << "Enter your choice (1, 2, or 3): ";
+    cin >> choice;
+
+    switch (choice) {
+        case 1:
+            cout << "Enter the side length of the cube: ";
+            cin >> sideLength;
+            cout << "Volume of the cube: " << calculateVolume(sideLength) << endl;
+            break;
+        case 2:
+            cout << "Enter the length, width, and height of the rectangle: ";
+            cin >> length >> width >> height;
+            cout << "Volume of the rectangle: " << calculateVolume(length, width, height) << endl;
+            break;
+        case 3:
+            cout << "Enter the radius and height of the cylinder: ";
+            cin >> radius >> height;
+            cout << "Volume of the cylinder: " << calculateVolume(radius, height) << endl;
+            break;
+        default:
+            cout << "Invalid choice!" << endl;
+            break;
+    }
+
+    return 0;
+}
